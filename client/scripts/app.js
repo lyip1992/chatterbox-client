@@ -44,15 +44,9 @@ var app = {
 
         _.each(messages, function(message) {
           if (app.friends.indexOf(message.username) !== -1) {
-            $('#chats').append('<a href="#">' + _.escape(message.username) + '</a>')
-                      .append('<div class="message friend">' + _.escape(message.text) +
-                              _.escape(message.roomname) + '</div>');
-          }
-          else
-          {
-            $('#chats').append('<a href="#">' + _.escape(message.username) + '</a>')
-                      .append('<div class="message">' + _.escape(message.text) +
-                              _.escape(message.roomname) + '</div>');
+            app.addMessage(message, 'friends');
+          } else {
+            app.addMessage(message);
           }
         });
 
@@ -70,8 +64,14 @@ var app = {
   clearMessages: function() {
     $('#chats').empty();
   },
-  addMessage: function(message) {
-    $('#chats').append('<div>' + message + '</div>');
+  addMessage: function(message, friend) {
+    // $('#chats').append('<div>' + message + '</div>');
+    if( friend ) friend = ' ' + friend;
+    else friend = '';
+
+    $('#chats').append('<a href="#">' + _.escape(message.username) + '</a>')
+               .append('<div class="message' + friend + '">' + _.escape(message.text) +
+                       _.escape(message.roomname) + '</div>');
   },
   addRoom: function(room) {
     $('#roomSelect').append('<div>' + room + '</div>');
