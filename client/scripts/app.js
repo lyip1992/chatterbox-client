@@ -44,13 +44,13 @@ var app = {
 
         _.each(messages, function(message) {
           if (app.friends.indexOf(message.username) !== -1) {
-            $('#main').append('<a href="#">' + _.escape(message.username) + '</a>')
+            $('#chats').append('<a href="#">' + _.escape(message.username) + '</a>')
                       .append('<div class="message friend">' + _.escape(message.text) +
                               _.escape(message.roomname) + '</div>');
           }
           else
           {
-            $('#main').append('<a href="#">' + _.escape(message.username) + '</a>')
+            $('#chats').append('<a href="#">' + _.escape(message.username) + '</a>')
                       .append('<div class="message">' + _.escape(message.text) +
                               _.escape(message.roomname) + '</div>');
           }
@@ -89,7 +89,7 @@ $(document).ready(function() {
   app.fetch();
 
   $('button').on('click', function() {
-    $('.message').remove();
+    app.clearMessages();
     app.fetch();
   });
 
