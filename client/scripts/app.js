@@ -4,8 +4,15 @@ var app = {
   friends: [],
   roomname: undefined,
   init: function() {
-    this.addFriend();
-    this.handleSubmit();
+    this.fetch();
+
+    $('button').on('click', function() {
+      this.clearMessages();
+      this.fetch();
+    }.bind(this));
+
+    // this.addFriend();
+    // this.handleSubmit();
   },
   server: 'https://api.parse.com/1/classes/chatterbox',
   send: function(message) {
@@ -51,7 +58,7 @@ var app = {
         });
 
 
-        $('a').on('click', function() {
+        $('.username').on('click', function() {
           var add = prompt('Do you want to add ' + $(this).text() + ' as a friend? (yes or no)');
           if ( add === "yes" && app.friends.indexOf($(this).text()) === -1)  {
             app.friends.push($(this).text());
@@ -69,12 +76,18 @@ var app = {
     if( friend ) friend = ' ' + friend;
     else friend = '';
 
-    $('#chats').append('<a href="#">' + _.escape(message.username) + '</a>')
+    $('#chats').append('<a class="username" href="#">' + _.escape(message.username) + '</a>')
                .append('<div class="message' + friend + '">' + _.escape(message.text) +
                        _.escape(message.roomname) + '</div>');
   },
   addRoom: function(room) {
-    $('#roomSelect').append('<div>' + room + '</div>');
+    $('#roomSelect').append('<a href="#">' + room + '</a><br>');
+    $('#roomSelect').on('click', 'a', function(event) {
+      event.preventDefault();
+      app.roomname = $(this).text();
+      app.clearMessages();
+      app.fetch();
+    });
   },
   addFriend: function(friend) {
     $('#main').append('<a class="username">' + friend + '</a>');
@@ -86,12 +99,8 @@ var app = {
 
 
 $(document).ready(function() {
-  app.fetch();
 
-  $('button').on('click', function() {
-    app.clearMessages();
-    app.fetch();
-  });
+  app.init();
 
   $('.sendmessage').submit(function(event) {
     event.preventDefault();
@@ -110,17 +119,17 @@ $(document).ready(function() {
     }
   });
 
-
-  $('.changeRoomForm').submit(function(event) {
+  $('.addRoomForm').submit(function(event) {
     event.preventDefault();
     var values = {};
-    $text = $('.changeRoomForm :input');
+    $text = $('.addRoomForm :input');
     $text.each(function() {
       values[this.name] = $(this).val();
     });
 
     if (values["room"]) {
-      $('.changeRoomForm')[0].reset();
+      $('.addRoomForm')[0].reset();
+      app.addRoom(values["room"]);
       app.roomname = values["room"];
     }
   });

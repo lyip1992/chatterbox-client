@@ -86,3 +86,24 @@ form input[type=text] {
 .friend {
     font-weight: bold;
 }
+
+.container {
+    margin: 0 auto;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+.forms {
+    display: inline-block;
+    width: 70%;
+    vertical-align: top;
+}
+
+aside {
+    margin-top: 40px;
+    display: inline-block;
+    width: 25%;
+    vertical-align: top;
+}
+
+

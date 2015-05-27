@@ -18,22 +18,31 @@
 
 
 
-      <form class="sendmessage">
-        <legend>Name</legend>
-        <input type="text" name="name">
-        <legend>Message</legend>
-        <input type="text" name="message">
-        <input type="submit" value="Submit">
-      </form>
+      <div class="container">
+        <div class="forms">
 
+          <form class="sendmessage">
+            <legend>Name</legend>
+            <input type="text" name="name">
+            <legend>Message</legend>
+            <input type="text" name="message">
+            <input type="submit" value="Submit">
+          </form>
 
-      <form class="changeRoomForm">
-        <legend>Change Room Name</legend>
-        <input type="text" name="room">
-        <input type="submit" value="Submit">
-      </form>
+          <form class="addRoomForm">
+            <legend>Add Room Name</legend>
+            <input type="text" name="room">
+            <input type="submit" value="Submit">
+          </form>
+          <button class="refresh">Refresh Messages</button>
+        </div>
 
-      <button class="refresh">Refresh Messages</button>
+        <aside id="rooms">
+          ROOMLIST
+          <div id="roomSelect">
+          </div>
+        </aside>
+      </div>
 
       <div id="chats">
       </div>
