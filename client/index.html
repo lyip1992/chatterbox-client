@@ -7,46 +7,34 @@
 
     <!-- dependencies -->
     <script src="bower_components/jquery/jquery.min.js"></script>
+
     <script src="bower_components/underscore/underscore-min.js"></script>
-    <!-- your scripts -->
+        <!-- your scripts -->
     <script src="env/config.js"></script>
     <script src="scripts/app.js"></script>
   </head>
   <body>
+
+    <script>
+      $(function(){
+        app.init();
+      });
+    </script>
     <div id="main">
       <h1>chatterbox</h1>
+      <!-- Your HTML goes here! -->
 
-
-
-      <div class="container">
-        <div class="forms">
-
-          <form class="sendmessage">
-            <legend>Name</legend>
-            <input type="text" name="name">
-            <legend>Message</legend>
-            <input type="text" name="message">
-            <input type="submit" value="Submit">
-          </form>
-
-          <form class="addRoomForm">
-            <legend>Add Room Name</legend>
-            <input type="text" name="room">
-            <input type="submit" value="Submit">
-          </form>
-          <button class="refresh">Refresh Messages</button>
-        </div>
-
-        <aside id="rooms">
-          ROOMLIST
-          <div id="roomSelect">
-          </div>
-        </aside>
+      <div class="spinner"><img src="images/spiffygif_46x46.gif"></div>
+      <div id="rooms">
+        Room:
+        <select id="roomSelect">
+        </select>
       </div>
-
-      <div id="chats">
-      </div>
-
+      <form action="#" id="send" method="post">
+        <input type="text" name="message" id="message"/>
+        <input type="submit" name="submit" class="submit"/>
+      </form>
+      <div id="chats"></div>
     </div>
   </body>
 </html>
